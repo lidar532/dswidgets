@@ -1,0 +1,7 @@
+website:
+  sidebar:
+    contents:
+      - index.ipynb
+      - 00_Buttons.ipynb
+      - 10_FileSystem.ipynb
+      - 99_init.ipynb

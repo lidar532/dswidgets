@@ -1,0 +1,58 @@
+[
+  {
+    "objectID": "filesystem.html#globals-module-wide",
+    "href": "filesystem.html#globals-module-wide",
+    "title": "widgets",
+    "section": "Globals, Module wide",
+    "text": "Globals, Module wide"
+  },
+  {
+    "objectID": "filesystem.html#functions",
+    "href": "filesystem.html#functions",
+    "title": "widgets",
+    "section": "Functions",
+    "text": "Functions"
+  },
+  {
+    "objectID": "filesystem.html#widgets",
+    "href": "filesystem.html#widgets",
+    "title": "widgets",
+    "section": "Widgets",
+    "text": "Widgets\n\ndef FolderSelector( parent, initial_dir=‘/’, CallBack_func = None ):\n\nsource\n\n\nFolderSelector\n\n FolderSelector (parent, initial_dir='/', CallBack_func=None)\n\n\n\n\n\n\n\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\nparent\n\n\nParent widget\n\n\ninitial_dir\nstr\n/\nDir to start in.\n\n\nCallBack_func\nNoneType\nNone\nFunction to call with selected folder.\n\n\nReturns\nobject\n\nThe folder selector object\n\n\n\nTest & Debug: File_Selector( parent, initial_dir=‘/’, CallBack_func = None ):\n\npn.extension('floatpanel') \n\n# Optional Function to be called once 'Ok' or 'Cancel' buttons are pressed.\ndef My_callBack( v ):\n  debug_w.value = main_w.Selected_Folder\n\ndef Button_commands( event ):\n    w = FolderSelector( main_w, CallBack_func = My_callBack )\n\nb_w = pn.widgets.Button(name='Select Folder')\ndebug_w = pn.widgets.StaticText(name='Selected Folder:', value='nothing selected yet.')\nmain_w = pn.Row( \"Main\", b_w, debug_w )\nmain_w.Selected_Folder = None\nb_w.on_click( Button_commands )\n#display(main_w.servable())\n#main_w\nmain_w.servable()\ndisplay(main_w)\n\n\n\n\n\n\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n  \n\n\n\n\n\nprint(main_w.Selected_Folder)\n\n/boot"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "dswidgets",
+    "section": "",
+    "text": "x\n\nimport panel as pn\nimport sys\n\n\npn.extension('floatpanel')\n\n\n\n\n\n\n\n\n\n\n\n\n  \n\n\n\n\n\nsys.path\n\n['/home/wright/github-projects/dswidgets/nbs',\n '/home/wright/miniconda3/envs/dss7/lib/python311.zip',\n '/home/wright/miniconda3/envs/dss7/lib/python3.11',\n '/home/wright/miniconda3/envs/dss7/lib/python3.11/lib-dynload',\n '',\n '/home/wright/miniconda3/envs/dss7/lib/python3.11/site-packages',\n '/home/wright/github-projects/dswidgets']\n\n\npip install dswidgets\nFill me in please! Don’t forget code examples:\n\ndir(ds)\n\n['Buttons',\n 'FileSystem',\n '__all__',\n '__builtins__',\n '__cached__',\n '__doc__',\n '__file__',\n '__loader__',\n '__name__',\n '__package__',\n '__path__',\n '__spec__',\n '__version__',\n 'dswidgets']\n\n\n\nds.__version__\n\n'0.0.2'\n\n\n\nb = ds.Buttons.Toggle()\n\n\nb.button"
+  },
+  {
+    "objectID": "buttons.html#globals-module-wide",
+    "href": "buttons.html#globals-module-wide",
+    "title": "widgets",
+    "section": "Globals, Module wide",
+    "text": "Globals, Module wide"
+  },
+  {
+    "objectID": "buttons.html#functions",
+    "href": "buttons.html#functions",
+    "title": "widgets",
+    "section": "Functions",
+    "text": "Functions"
+  },
+  {
+    "objectID": "buttons.html#widgets",
+    "href": "buttons.html#widgets",
+    "title": "widgets",
+    "section": "Widgets",
+    "text": "Widgets\n\ndef FolderSelector( parent, initial_dir=‘/’, CallBack_func = None ):\n\n\nclass Toggle:\n\nsource\n\n\nToggle\n\n Toggle (initial_state=0, id='', on_name='Data is On', off_name='Data is\n         Off', on_color='primary', off_color='danger', change_cb=None)\n\nA panel toggle button with customizable properties. The button’s name and color is set according to the state of the button. If a user call back change_cb is given, it will be called each time the button is toggled. A list will be passed containing the id and the state of the button.\n\n\n\n\n\n\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\ninitial_state\nint\n0\nThe initial button state upon creation.\n\n\nid\nstr\n\nAn identifier string.\n\n\non_name\nstr\nData is On\nMessage displayed on the button when in ON state\n\n\noff_name\nstr\nData is Off\nMessage displayed on button when in Off state\n\n\non_color\nstr\nprimary\nColor when ON\n\n\noff_color\nstr\ndanger\nColor when Off\n\n\nchange_cb\nNoneType\nNone\nAn optional user call back function called when toggled.\n\n\n\n\n#show_doc(toggle_button)\n\n\ndef my_cb( value ):\n  debug_w.value = value\n\n\ndebug_w = pn.widgets.StaticText(name=\"Debug\", value = 'not set')\ntb0 = Toggle(id='b1', on_name='0 Data On', off_name='0 Data off', change_cb=my_cb)\ntb1 = Toggle(id='b2', on_name='1 Data On', off_name='1 Data off', initial_state=1, change_cb=my_cb)\n\n\npn.Row(tb0.button, tb1.button, debug_w)\n\n\n\n\n\n  \n\n\n\n\n\ntb0.state, tb1.state\n\n(0, 0)"
+  },
+  {
+    "objectID": "99_init.html",
+    "href": "99_init.html",
+    "title": "Hidden Imports",
+    "section": "",
+    "text": "import sys"
+  }
+]

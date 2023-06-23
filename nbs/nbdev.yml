@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "dswidgets"
+  site-url: "https://lidar532.github.io/dswidgets"
+  description: "Data System Widgets."
+  repo-branch: main
+  repo-url: "https://github.com/lidar532/dswidgets"
