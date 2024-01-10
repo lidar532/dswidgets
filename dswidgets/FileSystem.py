@@ -15,7 +15,7 @@ import time
 from collections import namedtuple
 
 
-# %% ../nbs/10_FileSystem.ipynb 14
+# %% ../nbs/10_FileSystem.ipynb 15
 def get_cpu_model( ) ->str: # `"model name"` string.
   '''
   Reads `"/proc/cpuinfo"` and returns the `"model name"` string.
@@ -31,7 +31,7 @@ def get_cpu_model( ) ->str: # `"model name"` string.
         break
   return rv
 
-# %% ../nbs/10_FileSystem.ipynb 17
+# %% ../nbs/10_FileSystem.ipynb 19
 # return list has:
 # scputimes(user=7815.26, nice=2.28, system=3641.48, idle=8743022.95, iowait=7.88, irq=0.0, softirq=669.33, steal=0.0, guest=0.0, guest_nice=0.0)
 # wsl ww dt3 Execution time:
@@ -64,7 +64,7 @@ def cpu_use_stats( # None
   cpu_stats = CPU_STATS(vtotal/1e6, user+syst+iowait+softirq, user, syst, iowait, softirq, header, str)
   return cpu_stats
 
-# %% ../nbs/10_FileSystem.ipynb 25
+# %% ../nbs/10_FileSystem.ipynb 27
 def FolderSelector( parent,              # Parent widget
                    initial_dir='/',      # Dir to start in.
                    CallBack_func = None  # Function to call with selected folder.
@@ -93,7 +93,7 @@ def FolderSelector( parent,              # Parent widget
   parent.append( floatpanel )
   return floatpanel
 
-# %% ../nbs/10_FileSystem.ipynb 29
+# %% ../nbs/10_FileSystem.ipynb 31
 class Folder_Button:
   def __init__(self, 
                name='Select Folder',  # Folder Selector button name
@@ -123,7 +123,7 @@ class Folder_Button:
                             CallBack_func = self.My_callBack )
 
 
-# %% ../nbs/10_FileSystem.ipynb 36
+# %% ../nbs/10_FileSystem.ipynb 38
 class CPU_WIDGET:
   '''
   '''
