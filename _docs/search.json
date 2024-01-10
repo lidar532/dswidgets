@@ -1,5 +1,75 @@
 [
   {
+    "objectID": "99_init.html",
+    "href": "99_init.html",
+    "title": "Hidden Imports",
+    "section": "",
+    "text": "import sys"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "dswidgets",
+    "section": "",
+    "text": "dswidgets is a collection of panel derived widgets commonly used in airborne datasytems.\n\n\n\nToggle\nFolder_Button\nFolderSelector\nCPU_WIDGET()\n\n\n\n\n\n\n\nShutdown\nReboot\nMount a drive (May use auto-mounts)\nunMount a drive\n\n\n\n\n\nDisk\n\ndrive info, size,\nsize\nremaining space\n\nMemory\nIO operations\nnetwork"
+  },
+  {
+    "objectID": "index.html#features",
+    "href": "index.html#features",
+    "title": "dswidgets",
+    "section": "",
+    "text": "dswidgets is a collection of panel derived widgets commonly used in airborne datasytems.\n\n\n\nToggle\nFolder_Button\nFolderSelector\nCPU_WIDGET()\n\n\n\n\n\n\n\nShutdown\nReboot\nMount a drive (May use auto-mounts)\nunMount a drive\n\n\n\n\n\nDisk\n\ndrive info, size,\nsize\nremaining space\n\nMemory\nIO operations\nnetwork"
+  },
+  {
+    "objectID": "index.html#install",
+    "href": "index.html#install",
+    "title": "dswidgets",
+    "section": "Install",
+    "text": "Install\npip install dswidgets"
+  },
+  {
+    "objectID": "index.html#install-during-development",
+    "href": "index.html#install-during-development",
+    "title": "dswidgets",
+    "section": "Install during development",
+    "text": "Install during development\npip install -e ."
+  },
+  {
+    "objectID": "index.html#imports",
+    "href": "index.html#imports",
+    "title": "dswidgets",
+    "section": "Imports",
+    "text": "Imports\n\nimport panel as pn\nimport sys\n\n\nsys.path\n\n['/home/jovyan/work/github-projects/dswidgets/nbs',\n '/opt/conda/lib/python311.zip',\n '/opt/conda/lib/python3.11',\n '/opt/conda/lib/python3.11/lib-dynload',\n '',\n '/opt/conda/lib/python3.11/site-packages',\n '/home/jovyan/work/github-projects/nbdev_learn']\n\n\nBe sure to install dswidgets via make install, make dev-install\n\nimport dswidgets as ds\n\n\ndir(ds)\n\n['Buttons',\n 'FileSystem',\n '__all__',\n '__builtins__',\n '__cached__',\n '__doc__',\n '__file__',\n '__loader__',\n '__name__',\n '__package__',\n '__path__',\n '__spec__',\n '__version__',\n 'dswidgets']\n\n\nWe need to load the panel extension so we can view the widgets in the notebook output. The floatpanel parameter is required to show the FileBroswer in a floating pop-up widget.\n\npn.extension('floatpanel')\n\n\n\n\n\n\n\n\n\n\n\n\n  \n\n\n\n\nBelow are some of the variables we can access.\n\nprint(f' __version__ = {ds.__version__}\\n'\n      f'__package__ = {ds.__package__}\\n'\n      f'File = {ds.__file__}')\n\n __version__ = 0.0.3\n__package__ = dswidgets\nFile = /opt/conda/lib/python3.11/site-packages/dswidgets/__init__.py"
+  },
+  {
+    "objectID": "index.html#the-toggle-button",
+    "href": "index.html#the-toggle-button",
+    "title": "dswidgets",
+    "section": "The Toggle Button",
+    "text": "The Toggle Button\n\nb = ds.Buttons.Toggle()\nb.button\n\n\n\n\n\n  \n\n\n\n\n\nb.value\n\n1"
+  },
+  {
+    "objectID": "index.html#the-toggle-button-with-a-callback",
+    "href": "index.html#the-toggle-button-with-a-callback",
+    "title": "dswidgets",
+    "section": "The Toggle Button with a callback",
+    "text": "The Toggle Button with a callback\n\ndef button_changed(v):\n  debug_w.value = v\n  #print(v)\ndebug_w = pn.widgets.StaticText(\n  name=\"Debug_w.value:\", \n  value = 'Push the button to set this value.')\nb2 = ds.Buttons.Toggle(id='b2_id', change_cb = button_changed )\nw = pn.Row(b2.button, debug_w)\nw.servable()\n\n\n\n\n\n  \n\n\n\n\n\nb2.value\n\n0\n\n\nThe Toggle() button contains an ‘id’ element that you can\n\nb2.id\n\n'b2_id'"
+  },
+  {
+    "objectID": "index.html#filesystem.folder_button",
+    "href": "index.html#filesystem.folder_button",
+    "title": "dswidgets",
+    "section": "FileSystem.Folder_Button()",
+    "text": "FileSystem.Folder_Button()\nFolder_Button creates a button that triggers a pop-up Folder-Selector widget allowing the user to select a folder on the server system. Once the folder is selected, a user defined call back function is called with the selected folder as a parameter.\nBelow we define a call back cb() which will be called with the string value of the selected folder, and then create the Folder_Button. Click the Folder button to trigger the Folder_Selector dialog.\n\ndef cb(v):\n  print(f'{v=} ')\n\nFsb = ds.FileSystem.Folder_Button( name = \"Folder\",  call_back=cb )\nFsb.folder_button\n\n\n\n\n\n  \n\n\n\n\nAfter you select a folder, the result will also be in Fsb.value.\n\nFsb.value\n\n'/proc/37987'"
+  },
+  {
+    "objectID": "index.html#system_status_widget",
+    "href": "index.html#system_status_widget",
+    "title": "dswidgets",
+    "section": "System_Status_widget()",
+    "text": "System_Status_widget()\nThis widget provides a snapshot of the CPU utilization for each core RAM utilization, disk drive information at a user specified interval. The widget starts a thread which automatically updates widget values.\nBelow is instantiate the widget which also starts the internal thread which updates the widget.\n\ncw = ds.FileSystem.CPU_WIDGET()\ncw.cpu_status_widget.servable()\n\nNone\n\n\n\n\n\n\n  \n\n\n\n\nFor debugging, you can check the status of the widget with show_status().\n\ncw.show_status()\n\n      Thread Name                         Run  Alive    Loops  Interval\nThread-5 (system_status_thread)          True   True        4   1.0 Sec\n\n\nYou can also change the visibilty of the widget. Let’s hide it.\n\ncw.cpu_status_widget.visible = False\n\nNow lets redisplay it.\n\ncw.cpu_status_widget.visible = True"
+  },
+  {
     "objectID": "filesystem.html",
     "href": "filesystem.html",
     "title": "widgets",
@@ -32,77 +102,14 @@
     "href": "filesystem.html#functions",
     "title": "widgets",
     "section": "Functions",
-    "text": "Functions\n\nCPU\n\ndef get_cpu_model():\n\nsource\n\n\n\nget_cpu_model\n\n get_cpu_model ()\n\nReads \"/proc/cpuinfo\" and returns the \"model name\" string.\n\n# show_doc(get_cpu_model)\n\n\nprint(get_cpu_model() )\n\n Intel(R) Core(TM) i9-10900K CPU @ 3.70GHz\n\n\n\ndef cpu_use_stats()\n\nsource\n\n\n\ncpu_use_stats\n\n cpu_use_stats ()\n\nReturns CPU usage stats as a named tuple consisting of: - totalsecs : Total CPU seconds the analysis is based on. - all : sum of: user+syst+iowait+softirq percent use. - user : user % - system : system % - iowait : iowait % - softirq : softirq % - header : A header string for str. - str : string variable with fully formatted values for each of above.\n\n#show_doc(cpu_use_stats)\n\nMeasure the average execution.\n\ncpu_stats = cpu_use_stats()\n\n89.9 µs ± 6.78 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)\n\n\nPrint the header and str elememts. These can generally be used as is.\ncpu_stats.header,cpu_stats.str"
+    "text": "Functions\n\nCPU\n\ndef get_cpu_model():\n\nsource\n\n\n\nget_cpu_model\n\n get_cpu_model ()\n\nReads \"/proc/cpuinfo\" and returns the \"model name\" string.\n\n# show_doc(get_cpu_model)\n\n\nprint(get_cpu_model() )\n\n Intel(R) Core(TM) i9-10900K CPU @ 3.70GHz\n\n\n\ndef cpu_use_stats()\n\nsource\n\n\n\ncpu_use_stats\n\n cpu_use_stats ()\n\nReturns CPU usage stats as a named tuple consisting of: - totalsecs : Total CPU seconds the analysis is based on. - all : sum of: user+syst+iowait+softirq percent use. - user : user % - system : system % - iowait : iowait % - softirq : softirq % - header : A header string for str. - str : string variable with fully formatted values for each of above.\n\n#show_doc(cpu_use_stats)\n\nMeasure the average execution.\n\ncpu_stats = cpu_use_stats()\n\n95.6 µs ± 3.35 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)\n\n\nPrint the header and str elememts. These can generally be used as is.\ncpu_stats.header,cpu_stats.str"
   },
   {
     "objectID": "filesystem.html#widgets",
     "href": "filesystem.html#widgets",
     "title": "widgets",
     "section": "Widgets",
-    "text": "Widgets\n\ndef FolderSelector( parent, initial_dir=‘/’, CallBack_func = None ):\n\nsource\n\n\nFolderSelector\n\n FolderSelector (parent, initial_dir='/', CallBack_func=None)\n\n\n\n\n\n\n\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\nparent\n\n\nParent widget\n\n\ninitial_dir\nstr\n/\nDir to start in.\n\n\nCallBack_func\nNoneType\nNone\nFunction to call with selected folder.\n\n\nReturns\nobject\n\nThe folder selector object\n\n\n\nTest & Debug: File_Selector( parent, initial_dir=‘/’, CallBack_func = None ):\n\n# Optional Function to be called once 'Ok' or 'Cancel' buttons are pressed.\ndef My_callBack( v ):\n  debug_w.value = main_w.Selected_Folder\n\n# Call back when selection button is pressed.  This will cause the\n# FolderSelector to pop up on the screen.\ndef Button_commands( event ):\n    w = FolderSelector( main_w, CallBack_func = My_callBack )\n\n# Create a button widget to trigger the foldr selector popup\nb_w     = pn.widgets.Button(name='Select Folder')\n\n# Create a debug output text widget to show the selected folder.\ndebug_w = pn.widgets.StaticText(name='Selected Folder:', value='nothing selected yet.')\n\n# Put the button and the debug text widget on a row together\nmain_w  = pn.Row( \"Main\", b_w, debug_w )\n\n# Preload the main_w.Selected_Folder with None. This is to make sure the\n# variable is defined.\nmain_w.Selected_Folder = None\n\n# When the button is clicked, call Button_commands to pop up the folder selector\nb_w.on_click( Button_commands )\n\n# Show in the Jupyter output, or render with  panel \nmain_w.servable()\n\n\n\n\n\n  \n\n\n\n\n\nprint(main_w.Selected_Folder)\n\nNone\n\n\n\nsource\n\n\nFolder_Button\n\n Folder_Button (name='Select Folder', initial_dir='/', call_back=None)\n\n\n\n\n\n\n\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\nname\nstr\nSelect Folder\nFolder Selector button name\n\n\ninitial_dir\nstr\n/\nInitial directory\n\n\ncall_back\nNoneType\nNone\nCall this function with selection when done.\n\n\n\n\n#show_doc(FolderSelector)\n#show_doc(Folder_Button)\n\n\ndef cb(v):\n  print(f'cb = {v} ')\n\n\nF = Folder_Button( name = \"Folder\",  call_back=cb )\n\n\nF.folder_button\n\n\n\n\n\n  \n\n\n\n\n\nF.value\n\n\n\nCPU\n\nsource\n\n\nCPU_WIDGET\n\n CPU_WIDGET ()\n\n\n# show_doc( CPU_WIDGET )\n\n\ncw = CPU_WIDGET()\n\nNone\n\n\n\ncw.cpu_status_widget\n\n\n\n\n\n  \n\n\n\n\n\ncw.show_status()\n\n      Thread Name                         Run  Alive    Loops  Interval\nThread-33 (system_status_thread)         True   True    34521   1.0 Sec\n\n\n\ncw.Run = False\n\n\nDisks\n\ndisk_parts = ps.disk_partitions()\ndisk_parts\n\n[sdiskpart(device='/dev/sdb', mountpoint='/', fstype='ext4', opts='rw,relatime,discard,errors=remount-ro,data=ordered', maxfile=255, maxpath=4096),\n sdiskpart(device='/dev/sdd', mountpoint='/mnt/wsl/docker-desktop-data/isocache', fstype='ext4', opts='rw,relatime,discard,errors=remount-ro,data=ordered', maxfile=255, maxpath=4096),\n sdiskpart(device='/dev/sdc', mountpoint='/mnt/wsl/docker-desktop/docker-desktop-user-distro', fstype='ext4', opts='rw,relatime,discard,errors=remount-ro,data=ordered', maxfile=255, maxpath=4096),\n sdiskpart(device='/dev/loop0', mountpoint='/mnt/wsl/docker-desktop/cli-tools', fstype='iso9660', opts='ro,relatime,nojoliet,check=s,map=n,blocksize=2048', maxfile=255, maxpath=4096)]\n\n\n\nfor part in disk_parts:\n  print(f'{part.device=} {part.mountpoint} {part.fstype} {part.opts}')\n\npart.device='/dev/sdb' / ext4 rw,relatime,discard,errors=remount-ro,data=ordered\npart.device='/dev/sdd' /mnt/wsl/docker-desktop-data/isocache ext4 rw,relatime,discard,errors=remount-ro,data=ordered\npart.device='/dev/sdc' /mnt/wsl/docker-desktop/docker-desktop-user-distro ext4 rw,relatime,discard,errors=remount-ro,data=ordered\npart.device='/dev/loop0' /mnt/wsl/docker-desktop/cli-tools iso9660 ro,relatime,nojoliet,check=s,map=n,blocksize=2048\n\n\n\nps.disk_usage('/')\n\nsdiskusage(total=269490393088, used=11679051776, free=244050669568, percent=4.6)\n\n\n\nps.disk_usage('/mnt/d')\n\nsdiskusage(total=2000397791232, used=356009508864, free=1644388282368, percent=17.8)\n\n\n\n\nRAM\nreturned named tuple:\nsvmem(total=33598832640, available=30488162304, percent=9.3,\n    used=2635255808, free=27074908160, active=4016775168,   \n    inactive=1948282880, buffers=351911936, cached=3536756736,    \n    shared=2940928, slab=387448832)\n\nsys_m = ps.virtual_memory()\nprint('   Total    User    Free        Active   Buffers    Cached')\nprint(\nf'{sys_m.available/1e9:6.2f}gb\\\n  {sys_m.used/1e9:6.2f}gb\\\n  {sys_m.free/1e9:6.2f}gb\\\n  {sys_m.active/1e9:6.2f}gb\\\n  {sys_m.buffers/1e9:6.2f}gb\\\n  {sys_m.cached/1e9:6.2f}gb'\n)\n\n   Total    User    Free        Active   Buffers    Cached\n 30.47gb    2.65gb   27.05gb    4.04gb    0.35gb    3.54gb"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "dswidgets",
-    "section": "",
-    "text": "dswidgets is a collection of panel derived widgets commonly used in airborne datasytems.\n\n\n\nToggle\nFolder_Button\nFolderSelector\nCPU_WIDGET()\n\n\n\n\n\n\n\nShutdown\nReboot\nMount a drive (May use auto-mounts)\nunMount a drive\n\n\n\n\n\nDisk\n\ndrive info, size,\nsize\nremaining space\n\nMemory\nIO operations\nnetwork"
-  },
-  {
-    "objectID": "index.html#features",
-    "href": "index.html#features",
-    "title": "dswidgets",
-    "section": "",
-    "text": "dswidgets is a collection of panel derived widgets commonly used in airborne datasytems.\n\n\n\nToggle\nFolder_Button\nFolderSelector\nCPU_WIDGET()\n\n\n\n\n\n\n\nShutdown\nReboot\nMount a drive (May use auto-mounts)\nunMount a drive\n\n\n\n\n\nDisk\n\ndrive info, size,\nsize\nremaining space\n\nMemory\nIO operations\nnetwork"
-  },
-  {
-    "objectID": "index.html#install",
-    "href": "index.html#install",
-    "title": "dswidgets",
-    "section": "Install",
-    "text": "Install\npip install dswidgets"
-  },
-  {
-    "objectID": "index.html#install-during-devrlopment",
-    "href": "index.html#install-during-devrlopment",
-    "title": "dswidgets",
-    "section": "Install during devrlopment",
-    "text": "Install during devrlopment\npip install -e ."
-  },
-  {
-    "objectID": "index.html#imports",
-    "href": "index.html#imports",
-    "title": "dswidgets",
-    "section": "Imports",
-    "text": "Imports\n\nimport panel as pn\nimport sys\nimport dswidgets as ds\n\nWe need to load the panel extension so we can view the widgets in the notebook output. The floatpanel parameter is required to show the FileBroswer in a floating pop-up widget.\n\npn.extension('floatpanel')\n\n\n\n\n\n\n\n\n\n\n\n\n  \n\n\n\n\nBelow are some of the variables we can access.\n\nprint(f' __version__ = {ds.__version__}\\n'\n      f'__package__ = {ds.__package__}\\n'\n      f'File = {ds.__file__}')\n\n __version__ = 0.0.3\n__package__ = dswidgets\nFile = /home/wright/github-projects/dswidgets/dswidgets/__init__.py"
-  },
-  {
-    "objectID": "index.html#the-toggle-button",
-    "href": "index.html#the-toggle-button",
-    "title": "dswidgets",
-    "section": "The Toggle Button",
-    "text": "The Toggle Button\n\nb = ds.Buttons.Toggle()\nb.button\n\n\n\n\n\n  \n\n\n\n\n\nb.value\n\n0"
-  },
-  {
-    "objectID": "index.html#the-toggle-button-with-a-callback",
-    "href": "index.html#the-toggle-button-with-a-callback",
-    "title": "dswidgets",
-    "section": "The Toggle Button with a callback",
-    "text": "The Toggle Button with a callback\n\ndef button_changed(v):\n  debug_w.value = v\n  #print(v)\ndebug_w = pn.widgets.StaticText(\n  name=\"Debug_w.value:\", \n  value = 'Push the button to set this value.')\nb2 = ds.Buttons.Toggle(id='b2_id', change_cb = button_changed )\nw = pn.Row(b2.button, debug_w)\nw.servable()\n\n\n\n\n\n  \n\n\n\n\n\nb2.value\n\n0\n\n\nThe Toggle() button contains an ‘id’ element that you can\n\nb2.id\n\n'any id you want'"
-  },
-  {
-    "objectID": "index.html#filesystem.folder_button",
-    "href": "index.html#filesystem.folder_button",
-    "title": "dswidgets",
-    "section": "FileSystem.Folder_Button()",
-    "text": "FileSystem.Folder_Button()\nFolder_Button creates a button that triggers a pop-up Folder-Selector widget allowing the user to select a folder on the server system. Once the folder is selected, a user defined call back function is called with the selected folder as a parameter.\nBelow we define a call back cb() which will be called with the string value of the selected folder, and then create the Folder_Button. Click the Folder button to trigger the Folder_Selector dialog.\n\ndef cb(v):\n  print(f'{v=} ')\n\nFsb = ds.FileSystem.Folder_Button( name = \"Folder\",  call_back=cb )\nFsb.folder_button\n\n\n\n\n\n  \n\n\n\n\nAfter you select a folder, the result will also be in Fsb.value.\n\nFsb.value"
-  },
-  {
-    "objectID": "index.html#system_status_widget",
-    "href": "index.html#system_status_widget",
-    "title": "dswidgets",
-    "section": "System_Status_widget()",
-    "text": "System_Status_widget()\nThis widget provides a snapshot of the CPU utilization for each core RAM utilization, disk drive information at a user specified interval. The widget starts a thread which automatically updates widget values.\nBelow is instantiate the widget which also starts the internal thread which updates the widget.\n\ncw = ds.FileSystem.CPU_WIDGET()\ncw.cpu_status_widget.servable()\n\nNone\n\n\n\n\n\n\n  \n\n\n\n\nFor debugging, you can check the status of the widget with show_status().\n\ncw.show_status()\n\n      Thread Name                         Run  Alive    Loops  Interval\nThread-5 (system_status_thread)          True   True        0   1.0 Sec\n\n\nYou can also change the visibilty of the widget. Let’s hide it.\n\ncw.cpu_status_widget.visible = False\n\nNow lets redisplay it.\n\ncw.cpu_status_widget.visible = True"
+    "text": "Widgets\n\ndef FolderSelector( parent, initial_dir=‘/’, CallBack_func = None ):\n\nsource\n\n\nFolderSelector\n\n FolderSelector (parent, initial_dir='/', CallBack_func=None)\n\n\n\n\n\n\n\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\nparent\n\n\nParent widget\n\n\ninitial_dir\nstr\n/\nDir to start in.\n\n\nCallBack_func\nNoneType\nNone\nFunction to call with selected folder.\n\n\nReturns\nobject\n\nThe folder selector object\n\n\n\nTest & Debug: File_Selector( parent, initial_dir=‘/’, CallBack_func = None ):\n\n# Optional Function to be called once 'Ok' or 'Cancel' buttons are pressed.\ndef My_callBack( v ):\n  debug_w.value = main_w.Selected_Folder\n\n# Call back when selection button is pressed.  This will cause the\n# FolderSelector to pop up on the screen.\ndef Button_commands( event ):\n    w = FolderSelector( main_w, CallBack_func = My_callBack )\n\n# Create a button widget to trigger the foldr selector popup\nb_w     = pn.widgets.Button(name='Select Folder')\n\n# Create a debug output text widget to show the selected folder.\ndebug_w = pn.widgets.StaticText(name='Selected Folder:', value='nothing selected yet.')\n\n# Put the button and the debug text widget on a row together\nmain_w  = pn.Row( \"Main\", b_w, debug_w )\n\n# Preload the main_w.Selected_Folder with None. This is to make sure the\n# variable is defined.\nmain_w.Selected_Folder = None\n\n# When the button is clicked, call Button_commands to pop up the folder selector\nb_w.on_click( Button_commands )\n\n# Show in the Jupyter output, or render with  panel \nmain_w.servable()\n\n\n\n\n\n  \n\n\n\n\n\nprint(main_w.Selected_Folder)\n\n/\n\n\n\nsource\n\n\nFolder_Button\n\n Folder_Button (name='Select Folder', initial_dir='/', call_back=None)\n\n\n\n\n\n\n\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\nname\nstr\nSelect Folder\nFolder Selector button name\n\n\ninitial_dir\nstr\n/\nInitial directory\n\n\ncall_back\nNoneType\nNone\nCall this function with selection when done.\n\n\n\n\n#show_doc(FolderSelector)\n#show_doc(Folder_Button)\n\n\ndef cb(v):\n  print(f'cb = {v} ')\n\n\nF = Folder_Button( name = \"Folder\",  call_back=cb )\n\n\nF.folder_button\n\n\n\n\n\n  \n\n\n\n\n\nF.value\n\n'/boot'\n\n\n\n\nCPU\n\nsource\n\n\nCPU_WIDGET\n\n CPU_WIDGET ()\n\n\n# show_doc( CPU_WIDGET )\n\n\ncw = CPU_WIDGET()\n\nNone\n\n\n\ncw.cpu_status_widget\n\n\n\n\n\n  \n\n\n\n\n\ncw.show_status()\n\n      Thread Name                         Run  Alive    Loops  Interval\nThread-5 (system_status_thread)          True   True      109   1.0 Sec\n\n\n\ncw.Run = False\n\n\nDisks\n\ndisk_parts = ps.disk_partitions()\ndisk_parts\n\n[sdiskpart(device='/dev/sde', mountpoint='/etc/resolv.conf', fstype='ext4', opts='rw,relatime,discard,errors=remount-ro,data=ordered', maxfile=255, maxpath=4096),\n sdiskpart(device='/dev/sde', mountpoint='/etc/hostname', fstype='ext4', opts='rw,relatime,discard,errors=remount-ro,data=ordered', maxfile=255, maxpath=4096),\n sdiskpart(device='/dev/sde', mountpoint='/etc/hosts', fstype='ext4', opts='rw,relatime,discard,errors=remount-ro,data=ordered', maxfile=255, maxpath=4096),\n sdiskpart(device='/dev/sdc', mountpoint='/home/jovyan/work', fstype='ext4', opts='rw,relatime,discard,errors=remount-ro,data=ordered', maxfile=255, maxpath=4096)]\n\n\n\nfor part in disk_parts:\n  print(f'{part.device=} {part.mountpoint} {part.fstype} {part.opts}')\n\npart.device='/dev/sde' /etc/resolv.conf ext4 rw,relatime,discard,errors=remount-ro,data=ordered\npart.device='/dev/sde' /etc/hostname ext4 rw,relatime,discard,errors=remount-ro,data=ordered\npart.device='/dev/sde' /etc/hosts ext4 rw,relatime,discard,errors=remount-ro,data=ordered\npart.device='/dev/sdc' /home/jovyan/work ext4 rw,relatime,discard,errors=remount-ro,data=ordered\n\n\n\nps.disk_usage('/')\n\nsdiskusage(total=269490393088, used=55620259840, free=200109461504, percent=21.7)\n\n\n\nps.disk_usage('/mnt/')\n\nsdiskusage(total=269490393088, used=55620259840, free=200109461504, percent=21.7)\n\n\n\n\nRAM\nreturned named tuple:\nsvmem(total=33598832640, available=30488162304, percent=9.3,\n    used=2635255808, free=27074908160, active=4016775168,   \n    inactive=1948282880, buffers=351911936, cached=3536756736,    \n    shared=2940928, slab=387448832)\n\nsys_m = ps.virtual_memory()\nprint('   Total    User    Free        Active   Buffers    Cached')\nprint(\nf'{sys_m.available/1e9:6.2f}gb\\\n  {sys_m.used/1e9:6.2f}gb\\\n  {sys_m.free/1e9:6.2f}gb\\\n  {sys_m.active/1e9:6.2f}gb\\\n  {sys_m.buffers/1e9:6.2f}gb\\\n  {sys_m.cached/1e9:6.2f}gb'\n)\n\n   Total    User    Free        Active   Buffers    Cached\n 30.42gb    2.62gb   14.77gb    5.28gb    1.31gb   14.89gb"
   },
   {
     "objectID": "buttons.html#globals-module-wide",
@@ -123,13 +130,6 @@
     "href": "buttons.html#widgets",
     "title": "widgets",
     "section": "Widgets",
-    "text": "Widgets\n\ndef FolderSelector( parent, initial_dir=‘/’, CallBack_func = None ):\n\n\nclass Toggle:\n\nsource\n\n\nToggle\n\n Toggle (initial_state=0, id='', on_name='Data is On', off_name='Data is\n         Off', on_color='primary', off_color='danger', change_cb=None)\n\nA panel toggle button with customizable properties. The button’s name and color is set according to the state of the button. If a user call back change_cb is given, it will be called each time the button is toggled. A list will be passed containing the id and the state of the button.\n\n\n\n\n\n\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\ninitial_state\nint\n0\nThe initial button state upon creation.\n\n\nid\nstr\n\nAn identifier string.\n\n\non_name\nstr\nData is On\nMessage displayed on the button when in ON state\n\n\noff_name\nstr\nData is Off\nMessage displayed on button when in Off state\n\n\non_color\nstr\nprimary\nColor when ON\n\n\noff_color\nstr\ndanger\nColor when Off\n\n\nchange_cb\nNoneType\nNone\nAn optional user call back function called when toggled.\n\n\n\n\n#show_doc(toggle_button)\n\n\ndef my_cb( value ):\n  debug_w.value = value\n\n\ndebug_w = pn.widgets.StaticText(name=\"Debug\", value = 'not set')\ntb0 = Toggle(id='b1', on_name='0 Data On', off_name='0 Data off', change_cb=my_cb)\ntb1 = Toggle(id='b2', on_name='1 Data On', off_name='1 Data off', initial_state=1, change_cb=my_cb)\n\n\npn.Row(tb0.button, tb1.button, debug_w)\n\n\n\n\n\n  \n\n\n\n\n\ntb0.state, tb1.state\n\n(0, 0)"
-  },
-  {
-    "objectID": "99_init.html",
-    "href": "99_init.html",
-    "title": "Hidden Imports",
-    "section": "",
-    "text": "import sys"
+    "text": "Widgets\n\ndef FolderSelector( parent, initial_dir=‘/’, CallBack_func = None ):\n\n\nclass Toggle:\n\nsource\n\n\nToggle\n\n Toggle (initial_state=0, id='', on_name='Data is On', off_name='Data is\n         Off', on_color='primary', off_color='danger', change_cb=None)\n\nA panel toggle button with customizable properties. The button’s name and color is set according to the state of the button. If a user call back change_cb is given, it will be called each time the button is toggled. A list will be passed containing the id and the state of the button.\n\n\n\n\n\n\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\ninitial_state\nint\n0\nThe initial button state upon creation.\n\n\nid\nstr\n\nAn identifier string.\n\n\non_name\nstr\nData is On\nMessage displayed on the button when in ON state\n\n\noff_name\nstr\nData is Off\nMessage displayed on button when in Off state\n\n\non_color\nstr\nprimary\nColor when ON\n\n\noff_color\nstr\ndanger\nColor when Off\n\n\nchange_cb\nNoneType\nNone\nAn optional user call back function called when toggled.\n\n\n\n\n#show_doc(toggle_button)\n\n\ndef my_cb( value ):\n  debug_w.value = value\n\n\npn.extension()\ndebug_w = pn.widgets.StaticText(name=\"Debug\", value = 'not set')\ntb0 = Toggle(id='b1', on_name='0 Data On', off_name='0 Data off', change_cb=my_cb)\ntb1 = Toggle(id='b2', on_name='1 Data On', off_name='1 Data off', initial_state=1, change_cb=my_cb)\n\n\n\n\n\n\n\n\n\n\n\n\n  \n\n\n\n\n\npn.Row(tb0.button, tb1.button, debug_w)\n\n\n\n\n\n  \n\n\n\n\n\ntb0.state, tb1.state\n\n(0, 1)"
   }
 ]

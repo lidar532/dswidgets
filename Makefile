@@ -3,6 +3,9 @@ all:
 	nbdev_docs
 	nbdev_prepare
 
+docs:
+	nbdev_docs
+
 devinstall:
 	pip install -e . 
     
